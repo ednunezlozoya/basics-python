@@ -1,0 +1,235 @@
+Escenario para un Laboratorio de Examenes Clinicos
+
+----------------------------------------GET-----------------------------------------------
+http://laboratoriosacme.com/estudios
+
+[GET] 	Regresa todos los estudios ofrecidos por el laboratorio
+Accept:	application/json
+
+{
+  "estudios":[
+    {
+      "estudio-id":1,
+      "nombre":"prueba covid-19 pcr",
+      "precio":2999,
+      "restricciones":"ninguna"
+    },
+    {
+      "estudio-id":2,
+      "nombre":"prueba de embarazo",
+      "precio":800,
+      "restricciones":"no beber demasiados liquidos, no es necesario presentarse en ayunas"
+    },
+    {
+      "estudio-id":3,
+      "nombre":"trigliceridos",
+      "precio":290,
+      "restricciones":"ayuno de alimentos de 12 hrs minimo previo al examen"
+    },
+    {
+      "estudio-id":4,
+      "nombre":"colesterol",
+      "precio":250,
+      "restricciones":"ayuno de alimentos de 12 hrs minimo previo al examen"
+    },
+    {
+      "estudio-id":5,
+      "nombre":"glucosa",
+      "precio":300,
+      "restricciones":"ayuno de alimentos y de agua de 8 hrs minimo previo al examen"
+    },
+    {
+      "estudio-id":6,
+      "nombre":"biometria hematica",
+      "precio":750,
+      "restricciones":"ayuno de alimentos y de agua de 8 hrs minimo previo al examen"
+    },
+    {
+      "estudio-id":7,
+      "nombre":"examen de lipidos",
+      "precio":600,
+      "restricciones":"ayuno de alimentos y de agua de 8 hrs minimo previo al examen"
+    }
+  ]
+}      
+
+http://laboratoriosacme.com/pacientes
+
+[GET] 	Regresa todos los pacientes registrados que son clientes del laboratorio
+Accept:	application/json
+
+{
+  "pacientes":[
+    {
+      "paciente-id":1,
+      "nombre":"EDGAR ARMANDO NUÑEZ LOZOYA",
+      "fecha-nacimiento":"18-10-1976",
+      "telefono","6141743496",
+      "email","enunelozo@gmail.com"
+      "estatus":"activo",
+      "requiere-cfdi","si",
+      "rfc","NULE761018XXX",
+      "regimen-fiscal","605",
+      "codigo-postal","31060"
+      "fecha-alta","15-08-2020"
+    },
+    {
+      "paciente-id":2,
+      "nombre":"ROCIO RIVERA CORRAL",
+      "fecha-nacimiento":"19-08-1988",
+      "telefono","6141883421",
+      "email","rocrivera88@gmail.com"
+      "estatus":"activo",
+      "requiere-cfdi","no",
+      "fecha-alta","23-07-2018"
+    },
+    {
+      "paciente-id":3,
+      "nombre":"ALEJANDRO VILLANUEVA ESTRADA",
+      "fecha-nacimiento":"11-06-1985",
+      "telefono","6141172368",
+      "email","villanuevaalex@hotmail.com"
+      "estatus":"activo",
+      "requiere-cfdi","si",
+      "rfc","VISA850611XXX",
+      "regimen-fiscal","605",
+      "codigo-postal","31094"
+      "fecha-alta","21-09-2021"
+    }
+  ]
+}      
+
+------------------------------------------POST--------------------------------------------
+http://laboratoriosacme.com/citas
+
+[POST] 	Registra o agenda una cita para algun paciente para algun estudio determinado
+Accept:	application/json
+
+Body:
+{
+   "paciente-id":1,
+   "estudio-id",3,
+   "fecha-cita":"10-05-2023",
+   "hora-cita":"07:00"
+}
+
+Status Code: 	201 (Created)
+Content-type:	application/json
+
+{
+   "cita-id",1001,
+   "paciente-id":1,
+   "estudio-id",3,
+   "fecha-cita":"10-05-2023",
+   "hora-cita":"07:00"
+}
+
+http://laboratoriosacme.com/pacientes
+
+[POST] 	Agrega un nuevo paciente del laboratorio
+Accept:	application/json
+
+Body:
+{
+   "nombre":"SEBASTIAN DOMINGUEZ MENDOZA",
+   "fecha-nacimiento":"17-11-1991",
+   "telefono","6144731814",
+   "email","sedominguezm@gmail.com"
+   "requiere-cfdi","si",
+   "rfc","DOME911117XXX",
+   "regimen-fiscal","605",
+   "codigo-postal","31130"
+}
+
+Status Code: 	201 (Created)
+Content-type:	application/json
+
+{
+   "paciente-id":4,
+   "nombre":"SEBASTIAN DOMINGUEZ MENDOZA",
+   "fecha-nacimiento":"17-11-1991",
+   "telefono","6144731814",
+   "email","sedominguezm@gmail.com"
+   "requiere-cfdi","si",
+   "rfc","DOME911117XXX",
+   "regimen-fiscal","605",
+   "codigo-postal","31130",
+   "fecha-alta", "03-05-2023",
+   "estatus":"activo"
+}
+
+----------------------------------------PUT-----------------------------------------------
+http://laboratoriosacme.com/citas/1001
+
+[PUT] 	Re agendar una cita
+Accept:	application/json
+
+Body:
+{
+   "fecha-cita":"12-05-2023",
+   "hora-cita":"08:00",
+   "motivo","paciente sale de viaje"
+}
+
+Status Code: 201 (Updated)
+Content-type:	application/json
+
+{
+   "cita-id",1001,
+   "paciente-id":1,
+   "estudio-id",3,
+   "fecha-cita":"12-05-2023",
+   "hora-cita":"08:00",
+   "fecha-modificacion","03-05-2023"
+}
+
+http://laboratoriosacme.com/pacientes/2
+
+[PUT] 	Actualizar un paciente/cliente del laboratorio
+Accept:	application/json
+
+Body:
+{
+   "nombre":"ROCIO RIVERA CORRAL",
+   "fecha-nacimiento":"19-08-1988",
+   "telefono","6141883421",
+   "email","rocrivera88@gmail.com"
+   "requiere-cfdi","si",
+   "rfc","RICO880819XXX",
+   "regimen-fiscal","604",
+   "codigo-postal","31105"
+}
+
+Status Code: 201 (Updated)
+Content-type:	application/json
+
+{
+   "paciente-id":2,
+   "nombre":"ROCIO RIVERA CORRAL",
+   "fecha-nacimiento":"19-08-1988",
+   "telefono","6141883421",
+   "email","rocrivera88@gmail.com"
+   "requiere-cfdi","si",
+   "rfc","RICO880819XXX",
+   "regimen-fiscal","604",
+   "codigo-postal","31105",
+   "fecha-modificacion","03-05-2023"
+   "estatus":"activo"
+}
+
+-------------------------------------DELETE--------------------------------------------
+http://laboratoriosacme.com/citas/1001
+
+[DELETE] 	Eliminar una cita
+Accept:		application/json
+
+Status Code: 201 (OK)
+Content-type:	application/json
+
+http://laboratoriosacme.com/pacientes/3
+
+[DELETE] 	Eliminar un paciente/cliente del laboratorio
+Accept:		application/json
+
+Status Code: 201 (OK)
+Content-type:	application/json
